@@ -4,7 +4,8 @@ const recipeController = require('../controllers/recipeController');
 
 
 router.get('/', recipeController.homepage)
+router.get('/Categories', recipeController.exploreCategories)
 
 
 
-module.exports = router;
+module.exports = router;    
