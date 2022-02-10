@@ -4,12 +4,15 @@
 require('../models/database')
 const Category = require("../models/Category");
 const Recipe = require("../models/Recipe");
-
+/**
+ * GET /
+ * Homepage 
+*/
     exports.homepage = async(req, res) =>{
     try {
         const limitNumber = 5;
         const Categories = await Category.find({}).limit(limitNumber);
-        const latest = await Recipe.find({}).limit(limitNumber);
+        const latest = await Recipe.find({}).sort({_id: -1}).limit(limitNumber);
          const thai = await Recipe.find({ 'category': 'Thai' }).limit(limitNumber);
          const american = await Recipe.find({ 'category': 'American' }).limit(limitNumber);
          const chinese = await Recipe.find({ 'category': 'Chinese' }).limit(limitNumber);
@@ -20,7 +23,10 @@ const Recipe = require("../models/Recipe");
         res.status(500).send({message: error.message || "Error Occured" });
       }
 }
-
+/**
+ * GET /exploreCategories
+ *  
+*/
 exports.exploreCategories = async(req, res) =>{
   // res.render('index');
   try {
@@ -32,7 +38,10 @@ exports.exploreCategories = async(req, res) =>{
     }
 
 }
-
+/**
+ * GET /exploreRecipe
+ *  
+*/
 exports.exploreRecipe = async(req, res) => {
   try {
     let recipeId = req.params.id;
@@ -43,7 +52,10 @@ exports.exploreRecipe = async(req, res) => {
   }
 } 
 
-
+/**
+ * GET /exploreCategoriesById
+ *  
+*/
   exports.exploreCategoriesById = async(req, res) =>{
     // res.render('index');
     try {
@@ -56,7 +68,10 @@ exports.exploreRecipe = async(req, res) => {
       }
   
   }
-
+/**
+ * POST /searchRecipe
+ *  
+*/
   exports.searchRecipe = async(req, res) => {
     try {
       let searchTerm = req.body.searchTerm;
@@ -68,7 +83,10 @@ exports.exploreRecipe = async(req, res) => {
     }
     
   }
-
+/**
+ * GET /exploreLatest
+ *  
+*/
   exports.exploreLatest = async(req, res) => {
     try {
       const limitNumber = 20;
@@ -80,7 +98,10 @@ exports.exploreRecipe = async(req, res) => {
     
   }
   
-
+/**
+ * GET /exploreRandom
+ *  
+*/
   exports.exploreRandom = async(req, res) => {
     try {
       let count = await Recipe.find().countDocuments();
@@ -92,7 +113,10 @@ exports.exploreRecipe = async(req, res) => {
     }
   } 
 
-  
+ /**
+ * GET /submitRecipe
+ *  
+*/ 
   exports.submitRecipe = async(req, res) => {
     try {
 const infoErrorsObj = req.flash('infoErrors')
@@ -102,7 +126,10 @@ const infoSubmitObj = req.flash('infoSubmit')
       res.status(500).send({message: error.message || "Error Occured" });
     }
   } 
-
+/**
+ * POST /
+ * submitRecipeOnPost 
+*/
   exports.submitRecipeOnPost = async(req, res) => {
     try {
       
