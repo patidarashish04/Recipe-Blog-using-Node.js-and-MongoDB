@@ -9,8 +9,8 @@
 </nav>
 
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mb-4">
-  <% if(typeof categories !== 'undefined' && categories.length > 0) { %>
-    <% categories.forEach(function(category, index) { %>
+  <% if(typeof Categories !== 'undefined' && Categories.length > 0) { %>
+    <% Categories.forEach(function(category, index) { %>
       <a href="/categories/<%= category.name %>" class="col text-center category__link">
         <div class="category__img shadow">
           <img src="/img/<%= category.image %>" alt="<%= category.name %>" loading="lazy">
@@ -22,8 +22,8 @@
 </div>
 
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-  <% if(typeof categoryById !== 'undefined' && categoryById.length > 0) { %>
-    <% categoryById.forEach(function(recipe, index){ %>
+  <% if(typeof CategoryById !== 'undefined' && CategoryById.length > 0) { %>
+    <% CategoryById.forEach(function(recipe, index){ %>
     <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
       <div class="category__img category__img--large shadow">
         <img src="/uploads/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy">
@@ -35,3 +35,4 @@
     <p>No items found.</p>
   <% } %>
 </div>
+
